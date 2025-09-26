@@ -1,0 +1,72 @@
+// EduCoin Requirements Definition
+// This file defines all functional and non-functional requirements
+// in a structured format
+
+const EduCoinRequirements = {
+  projectName: "EduCoin - Classroom Cryptocurrency",
+  version: "1.0",
+  description: "A classroom cryptocurrency system for rewarding and transferring coins among students",
+  
+  objectives: [
+    "Reward students with EduCoins for correct answers or participation",
+    "Allow peer-to-peer transfers between students",
+    "Display real-time balances and a leaderboard",
+    "Teach blockchain and cryptocurrency fundamentals through gamification"
+  ],
+
+  actors: [
+    { role: "Teacher", permissions: ["issue coin", "view all balances", "view leaderboard"] },
+    { role: "Student", permissions: ["view wallet", "transfer coins", "view leaderboard"] }
+  ],
+
+  functionalRequirements: [
+    {
+      id: "FR1",
+      description: "Teacher can issue 1 or more EduCoins to a student wallet",
+      inputs: ["student wallet ID", "coin amount"],
+      outputs: ["transaction recorded in ledger", "updated wallet balance"]
+    },
+    {
+      id: "FR2",
+      description: "Students can transfer coins to other students",
+      inputs: ["from wallet ID", "to wallet ID", "amount"],
+      outputs: ["transaction recorded in ledger", "updated balances for both wallets"],
+      constraints: ["Insufficient balance prevents transfer"]
+    },
+    {
+      id: "FR3",
+      description: "Wallets display real-time balance and transaction history",
+      inputs: ["wallet ID"],
+      outputs: ["current balance", "last 10 transactions"]
+    },
+    {
+      id: "FR4",
+      description: "Leaderboard shows top coin holders in descending order",
+      inputs: ["ledger data"],
+      outputs: ["ordered list of students by balance"]
+    },
+    {
+      id: "FR5",
+      description: "All transactions are logged in a ledger for transparency",
+      inputs: ["transaction data"],
+      outputs: ["persisted ledger record"]
+    }
+  ],
+
+  nonFunctionalRequirements: [
+    { id: "NFR1", description: "System should be real-time using Socket.IO for updates" },
+    { id: "NFR2", description: "Data persistence in ledger.json (or database for production)" },
+    { id: "NFR3", description: "System should have basic input validation and prevent negative balances" },
+    { id: "NFR4", description: "UI should be simple, responsive, and suitable for classroom usage" }
+  ],
+
+  optionalFeatures: [
+    "Gamification badges: Top Miner, Most Generous, Top Earner",
+    "Weekly leaderboard rewards",
+    "Classroom marketplace to redeem coins for perks",
+    "Visualization of transactions as blocks"
+  ]
+};
+
+// Export for possible integration
+module.exports = EduCoinRequirements;
